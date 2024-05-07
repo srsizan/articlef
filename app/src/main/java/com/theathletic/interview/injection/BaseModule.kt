@@ -1,5 +1,7 @@
 package com.theathletic.interview.injection
 
+import com.theathletic.interview.articleDetails.data.ArticleDetailsRepository
+import com.theathletic.interview.articleDetails.ui.ArticleDetailsViewModel
 import com.theathletic.interview.articles.data.ArticleRepository
 import com.theathletic.interview.articles.data.remote.ArticleApi
 import com.theathletic.interview.articles.ui.ArticlesViewModel
@@ -22,5 +24,9 @@ val baseModule = module {
     single { ArticleRepository(get()) }
 
     viewModel { ArticlesViewModel(get()) }
+
+    single { ArticleDetailsRepository(get()) }
+
+    viewModel { ArticleDetailsViewModel(get()) }
 
 }

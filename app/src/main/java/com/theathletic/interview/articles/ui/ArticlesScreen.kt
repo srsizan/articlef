@@ -1,6 +1,7 @@
 package com.theathletic.interview.articles.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,7 +15,6 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -31,7 +31,6 @@ import org.koin.androidx.compose.getViewModel
 class ArticleUiModel(
     val title: String,
     val author: String? = null,
-    val displayAuthor: Boolean = false,
     val imageUrl: String?
 )
 
@@ -73,6 +72,9 @@ fun ArticleItem(model: ArticleUiModel) {
             .fillMaxWidth()
             .background(color = Black)
             .height(200.dp)
+            .clickable( onClick = {
+
+            })
     ) {
         AsyncImage(
             alpha = 0.5f,
@@ -106,8 +108,8 @@ fun ArticleItemPreview() {
     ArticleItem(
         ArticleUiModel(
             "Sample Title",
-            imageUrl = null,
-            author = "Sample Author Name"
+            author = "Sample Author Name",
+            imageUrl = null
         )
     )
 }
