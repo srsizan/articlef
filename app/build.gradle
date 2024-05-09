@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.theathletic.interview"
         minSdkVersion 23
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -22,7 +22,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.2"
+        kotlinCompilerExtensionVersion = "1.4.0"
     }
 
     buildTypes {
@@ -89,5 +89,5 @@ dependencies {
 
     //Leak Canary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
-
+    implementation "androidx.navigation:navigation-compose:2.7.1"
 }

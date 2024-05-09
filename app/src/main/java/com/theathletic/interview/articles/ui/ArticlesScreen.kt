@@ -22,8 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.theathletic.interview.core.collectWithLifecycle
+import com.theathletic.interview.main.Screen
 import com.theathletic.interview.ui.theme.Black
 import com.theathletic.interview.ui.theme.White
 import org.koin.androidx.compose.getViewModel
@@ -35,7 +37,7 @@ class ArticleUiModel(
 )
 
 @Composable
-fun ArticlesScreen(viewModel: ArticlesViewModel = getViewModel()) {
+fun ArticlesScreen(viewModel: ArticlesViewModel = getViewModel(), navController: NavHostController) {
 
     val state by viewModel.viewState.collectAsState(initial = ArticlesViewState(true, emptyList()))
 
@@ -45,11 +47,15 @@ fun ArticlesScreen(viewModel: ArticlesViewModel = getViewModel()) {
 //        }
     }
 
-    ArticlesList(showLoading = state.isLoading, models = state.articleModels)
+    ArticlesList(showLoading = state.isLoading, models = state.articleModels, navController)
 }
 
 @Composable
-fun ArticlesList(showLoading: Boolean, models: List<ArticleUiModel>) {
+fun ArticlesList(
+    showLoading: Boolean,
+    models: List<ArticleUiModel>,
+    navController: NavHostController
+) {
     Box {
         if (showLoading) {
             Box(
@@ -60,19 +66,20 @@ fun ArticlesList(showLoading: Boolean, models: List<ArticleUiModel>) {
             }
         }
         LazyColumn(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            items(models) { ArticleItem(it) }
+            items(models) { ArticleItem(it,navController) }
         }
     }
 }
 
 @Composable
-fun ArticleItem(model: ArticleUiModel) {
+fun ArticleItem(model: ArticleUiModel, navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .background(color = Black)
             .height(200.dp)
             .clickable( onClick = {
+                navController.navigate(Screen.ArticleDetailsScreen.route)
 
             })
     ) {
@@ -102,14 +109,15 @@ fun ArticleItem(model: ArticleUiModel) {
     }
 }
 
-@Preview(backgroundColor = 0xFFffffff, showBackground = true, name = "Article")
-@Composable
-fun ArticleItemPreview() {
-    ArticleItem(
-        ArticleUiModel(
-            "Sample Title",
-            author = "Sample Author Name",
-            imageUrl = null
-        )
-    )
-}
+//@Preview(backgroundColor = 0xFFffffff, showBackground = true, name = "Article")
+//@Composable
+//fun ArticleItemPreview() {
+//    ArticleItem(
+//        ArticleUiModel(
+//            "Sample Title",
+//            author = "Sample Author Name",
+//            imageUrl = null
+//        ),
+//        navController
+//    )
+//}
