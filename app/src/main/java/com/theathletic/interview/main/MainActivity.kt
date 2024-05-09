@@ -39,12 +39,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AthleticTheme {
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
                     Navigation()
                 }
             }
         }
     }
+
     sealed class Screen(
         @StringRes val resourceTitle: Int, @DrawableRes val resourceIcon: Int
     ) {
@@ -69,8 +73,9 @@ fun MainScreenView(
         Column(modifier = Modifier.padding(paddingValues)) {
             when (selectedScreen) {
                 MainActivity.Screen.Articles -> {
-                    ArticlesScreen(articlesViewModel,articleDetailsViewModel, navController)
+                    ArticlesScreen(articlesViewModel, articleDetailsViewModel, navController)
                 }
+
                 MainActivity.Screen.Leagues -> Text(
                     modifier = Modifier
                         .padding(10.dp)
@@ -83,7 +88,10 @@ fun MainScreenView(
 }
 
 @Composable
-fun BottomNavigation(selectedScreen: MainActivity.Screen, onScreenSelected: (MainActivity.Screen) -> Unit) {
+fun BottomNavigation(
+    selectedScreen: MainActivity.Screen,
+    onScreenSelected: (MainActivity.Screen) -> Unit
+) {
     val items = listOf(MainActivity.Screen.Articles, MainActivity.Screen.Leagues)
     val context = LocalContext.current
     BottomNavigation {
@@ -91,7 +99,8 @@ fun BottomNavigation(selectedScreen: MainActivity.Screen, onScreenSelected: (Mai
             BottomNavigationItem(selected = item == selectedScreen,
                 icon = {
                     Icon(
-                        painterResource(id = item.resourceIcon), contentDescription = context.getString(item.resourceTitle)
+                        painterResource(id = item.resourceIcon),
+                        contentDescription = context.getString(item.resourceTitle)
                     )
                 },
                 label = { Text(text = context.getString(item.resourceTitle), fontSize = 10.sp) },

@@ -4,13 +4,11 @@
     <item
         android:id="@+id/navigation_articles"
         android:icon="@drawable/ic_articles"
-        android:title="@string/title_articles"
-        />
+        android:title="@string/title_articles" />
 
     <item
         android:id="@+id/navigation_leagues"
         android:icon="@drawable/ic_leagues"
-        android:title="@string/title_leagues"
-        />
+        android:title="@string/title_leagues" />
 
 </menu>

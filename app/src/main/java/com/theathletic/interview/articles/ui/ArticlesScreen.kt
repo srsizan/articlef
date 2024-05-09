@@ -20,10 +20,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.theathletic.interview.articleDetails.ui.ArticleDetailsViewModel
 import com.theathletic.interview.core.collectWithLifecycle
@@ -36,7 +34,7 @@ class ArticleUiModel(
     val title: String,
     val author: String? = null,
     val imageUrl: String?,
-    val id : String
+    val id: String
 )
 
 @Composable
@@ -54,7 +52,12 @@ fun ArticlesScreen(
 //        }
     }
 
-    ArticlesList(showLoading = state.isLoading, models = state.articleModels,articleDetailsViewModel, navController)
+    ArticlesList(
+        showLoading = state.isLoading,
+        models = state.articleModels,
+        articleDetailsViewModel,
+        navController
+    )
 }
 
 @Composable
@@ -74,7 +77,7 @@ fun ArticlesList(
             }
         }
         LazyColumn(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            items(models) { ArticleItem(it,articleDetailsViewModel,navController) }
+            items(models) { ArticleItem(it, articleDetailsViewModel, navController) }
         }
     }
 }

@@ -15,7 +15,7 @@ data class ArticleDetails(
     val team: Team,
     val title: String,
     val updatedAt: String
-){
+) {
     companion object {
         const val UNKNOWN = ""
     }

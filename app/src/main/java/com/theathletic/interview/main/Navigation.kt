@@ -24,7 +24,7 @@ fun Navigation() {
             MainScreenView(navController, articlesViewModel, articleDetailsViewModel)
         }
         composable(route = Screen.ArticleDetailsScreen.route) {
-            ArticleDetailsScreen(navController,articleDetailsViewModel)
+            ArticleDetailsScreen(navController, articleDetailsViewModel)
         }
 
     }
