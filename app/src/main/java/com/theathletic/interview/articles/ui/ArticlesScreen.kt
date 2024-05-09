@@ -23,7 +23,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
+import com.theathletic.interview.articleDetails.ui.ArticleDetailsViewModel
 import com.theathletic.interview.core.collectWithLifecycle
 import com.theathletic.interview.main.Screen
 import com.theathletic.interview.ui.theme.Black
@@ -33,11 +35,16 @@ import org.koin.androidx.compose.getViewModel
 class ArticleUiModel(
     val title: String,
     val author: String? = null,
-    val imageUrl: String?
+    val imageUrl: String?,
+    val id : String
 )
 
 @Composable
-fun ArticlesScreen(viewModel: ArticlesViewModel = getViewModel(), navController: NavHostController) {
+fun ArticlesScreen(
+    viewModel: ArticlesViewModel = getViewModel(),
+    articleDetailsViewModel: ArticleDetailsViewModel,
+    navController: NavHostController
+) {
 
     val state by viewModel.viewState.collectAsState(initial = ArticlesViewState(true, emptyList()))
 
@@ -47,13 +54,14 @@ fun ArticlesScreen(viewModel: ArticlesViewModel = getViewModel(), navController:
 //        }
     }
 
-    ArticlesList(showLoading = state.isLoading, models = state.articleModels, navController)
+    ArticlesList(showLoading = state.isLoading, models = state.articleModels,articleDetailsViewModel, navController)
 }
 
 @Composable
 fun ArticlesList(
     showLoading: Boolean,
     models: List<ArticleUiModel>,
+    articleDetailsViewModel: ArticleDetailsViewModel,
     navController: NavHostController
 ) {
     Box {
@@ -66,19 +74,24 @@ fun ArticlesList(
             }
         }
         LazyColumn(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            items(models) { ArticleItem(it,navController) }
+            items(models) { ArticleItem(it,articleDetailsViewModel,navController) }
         }
     }
 }
 
 @Composable
-fun ArticleItem(model: ArticleUiModel, navController: NavHostController) {
+fun ArticleItem(
+    model: ArticleUiModel,
+    articleDetailsViewModel: ArticleDetailsViewModel,
+    navController: NavHostController
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .background(color = Black)
             .height(200.dp)
-            .clickable( onClick = {
+            .clickable(onClick = {
+                articleDetailsViewModel.getArticleDetails(model.id)
                 navController.navigate(Screen.ArticleDetailsScreen.route)
 
             })
@@ -116,8 +129,11 @@ fun ArticleItem(model: ArticleUiModel, navController: NavHostController) {
 //        ArticleUiModel(
 //            "Sample Title",
 //            author = "Sample Author Name",
-//            imageUrl = null
+//            imageUrl = null,
+//            id = "",
 //        ),
-//        navController
+//
+//        articleDetailsViewModel,
+//        navController = rememberNavController()
 //    )
 //}

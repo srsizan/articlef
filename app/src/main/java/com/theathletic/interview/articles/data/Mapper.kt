@@ -16,5 +16,6 @@ fun RemoteArticle.toDomain() = Article(
 
 fun Article.toUiModel() = ArticleUiModel(
     title = title,
-    imageUrl = imageUrl
+    imageUrl = imageUrl,
+    id = id
 )

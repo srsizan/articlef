@@ -28,10 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.theathletic.interview.R
+import com.theathletic.interview.articleDetails.ui.ArticleDetailsViewModel
 import com.theathletic.interview.articles.ui.ArticlesScreen
 import com.theathletic.interview.articles.ui.ArticlesViewModel
 import com.theathletic.interview.ui.theme.AthleticTheme
-import org.koin.androidx.compose.viewModel
 
 class MainActivity : ComponentActivity() {
 
@@ -54,8 +54,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreenView(navController: NavHostController) {
-    val articlesViewModel: ArticlesViewModel by viewModel()
+fun MainScreenView(
+    navController: NavHostController,
+    articlesViewModel: ArticlesViewModel,
+    articleDetailsViewModel: ArticleDetailsViewModel
+) {
 
     var selectedScreen by remember { mutableStateOf(MainActivity.Screen.Articles as MainActivity.Screen) }
     Scaffold(bottomBar = {
@@ -66,7 +69,7 @@ fun MainScreenView(navController: NavHostController) {
         Column(modifier = Modifier.padding(paddingValues)) {
             when (selectedScreen) {
                 MainActivity.Screen.Articles -> {
-                    ArticlesScreen(articlesViewModel, navController)
+                    ArticlesScreen(articlesViewModel,articleDetailsViewModel, navController)
                 }
                 MainActivity.Screen.Leagues -> Text(
                     modifier = Modifier

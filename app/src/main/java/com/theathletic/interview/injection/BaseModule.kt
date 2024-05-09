@@ -1,6 +1,7 @@
 package com.theathletic.interview.injection
 
 import com.theathletic.interview.articleDetails.data.ArticleDetailsRepository
+import com.theathletic.interview.articleDetails.data.remote.ArticleDetailsApi
 import com.theathletic.interview.articleDetails.ui.ArticleDetailsViewModel
 import com.theathletic.interview.articles.data.ArticleRepository
 import com.theathletic.interview.articles.data.remote.ArticleApi
@@ -20,6 +21,7 @@ val baseModule = module {
     }
 
     factory { get<Retrofit>().create(ArticleApi::class.java) }
+    factory { get<Retrofit>().create(ArticleDetailsApi::class.java) }
 
     single { ArticleRepository(get()) }
 

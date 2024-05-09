@@ -1,13 +1,13 @@
 package com.theathletic.interview.articleDetails.data
 
 import com.theathletic.interview.articleDetails.data.remote.RemoteArticleDetails
-import com.theathletic.interview.articleDetails.ui.ArticleDetailsUiModel
+import com.theathletic.interview.articleDetails.ui.ArticleDetailUiModel
 
 fun RemoteArticleDetails.toDomain() = ArticleDetails(
     author = author,
     body = body,
     createdAt = createdAt,
-    deletedAt = deletedAt,
+    deletedAt = deletedAt?: "",
     id = id,
     imageUrlString = imageUrlString,
     league = league,
@@ -16,7 +16,7 @@ fun RemoteArticleDetails.toDomain() = ArticleDetails(
     updatedAt = updatedAt
 )
 
-fun ArticleDetails.toUiModel() = ArticleDetailsUiModel(
+fun ArticleDetails.toUiModel() = ArticleDetailUiModel(
     title = title,
     imageUrl = imageUrlString,
     body = body
