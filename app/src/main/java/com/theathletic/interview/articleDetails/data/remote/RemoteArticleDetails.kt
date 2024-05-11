@@ -1,5 +1,11 @@
 package com.theathletic.interview.articleDetails.data.remote
 
+
+/**
+ * Remote Article Details Class for Getting Article Details
+ */
+
+
 data class RemoteArticleDetails(
     val author: Author,
     val body: String,

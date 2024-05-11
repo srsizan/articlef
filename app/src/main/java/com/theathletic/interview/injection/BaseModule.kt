@@ -6,6 +6,9 @@ import com.theathletic.interview.articleDetails.ui.ArticleDetailsViewModel
 import com.theathletic.interview.articles.data.ArticleRepository
 import com.theathletic.interview.articles.data.remote.ArticleApi
 import com.theathletic.interview.articles.ui.ArticlesViewModel
+import com.theathletic.interview.leagues.data.LeagueRepository
+import com.theathletic.interview.leagues.data.remote.LeagueApi
+import com.theathletic.interview.leagues.ui.LeaguesViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -22,6 +25,7 @@ val baseModule = module {
 
     factory { get<Retrofit>().create(ArticleApi::class.java) }
     factory { get<Retrofit>().create(ArticleDetailsApi::class.java) }
+    factory { get<Retrofit>().create(LeagueApi::class.java) }
 
     single { ArticleRepository(get()) }
 
@@ -30,5 +34,7 @@ val baseModule = module {
     single { ArticleDetailsRepository(get()) }
 
     viewModel { ArticleDetailsViewModel(get()) }
+    single { LeagueRepository(get()) }
 
+    viewModel { LeaguesViewModel(get()) }
 }

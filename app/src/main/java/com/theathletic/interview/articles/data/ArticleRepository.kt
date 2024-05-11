@@ -6,5 +6,6 @@ class ArticleRepository(private val articleApi: ArticleApi) {
 
     suspend fun getArticles(): List<Article> {
         val remoteArticles = articleApi.getArticles() ?: emptyList() // Return empty list if null
-        return remoteArticles.map { it.toDomain() }    }
+        return remoteArticles.map { it.toDomain() }
+    }
 }

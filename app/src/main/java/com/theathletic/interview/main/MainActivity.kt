@@ -20,17 +20,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.theathletic.interview.R
 import com.theathletic.interview.articleDetails.ui.ArticleDetailsViewModel
 import com.theathletic.interview.articles.ui.ArticlesScreen
 import com.theathletic.interview.articles.ui.ArticlesViewModel
+import com.theathletic.interview.leagues.ui.LeaguesScreen
+import com.theathletic.interview.leagues.ui.LeaguesViewModel
 import com.theathletic.interview.ui.theme.AthleticTheme
 
 class MainActivity : ComponentActivity() {
@@ -61,7 +61,8 @@ class MainActivity : ComponentActivity() {
 fun MainScreenView(
     navController: NavHostController,
     articlesViewModel: ArticlesViewModel,
-    articleDetailsViewModel: ArticleDetailsViewModel
+    articleDetailsViewModel: ArticleDetailsViewModel,
+    leaguesViewModel: LeaguesViewModel
 ) {
 
     var selectedScreen by remember { mutableStateOf(MainActivity.Screen.Articles as MainActivity.Screen) }
@@ -76,12 +77,9 @@ fun MainScreenView(
                     ArticlesScreen(articlesViewModel, articleDetailsViewModel, navController)
                 }
 
-                MainActivity.Screen.Leagues -> Text(
-                    modifier = Modifier
-                        .padding(10.dp)
-                        .align(Alignment.CenterHorizontally),
-                    text = "League List"
-                )
+                MainActivity.Screen.Leagues -> {
+                    LeaguesScreen(leaguesViewModel, navController = navController)
+                }
             }
         }
     }
