@@ -78,7 +78,7 @@ fun MainScreenView(
                 }
 
                 MainActivity.Screen.Leagues -> {
-                    LeaguesScreen(leaguesViewModel, navController = navController)
+                    LeaguesScreen(leaguesViewModel)
                 }
             }
         }

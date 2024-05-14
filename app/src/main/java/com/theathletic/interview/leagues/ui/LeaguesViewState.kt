@@ -1,7 +1,7 @@
 package com.theathletic.interview.leagues.ui
 
 data class LeaguesViewState(
-    val isLoading: Boolean = true,
+    val isLoading: Boolean = false,
     val leagueModels: List<LeagueUiModel> = emptyList()
 )
 
